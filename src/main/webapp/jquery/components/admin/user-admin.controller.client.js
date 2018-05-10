@@ -18,8 +18,30 @@
 
     }
 
-    function createUser() { … }
-    function findAllUsers() { … }
+    function createUser() {
+        $usernameFld = $('#usernameFld').val();
+        $passwordFld = $('#passwordFld').val();
+        $firstNameFld = $('#firstNameFld').val();
+        $lastNameFld = $('#lastNameFld').val();
+        $roleFld = $('#roleFld').val();
+
+        var user = {
+            username: $usernameFld,
+            password: $passwordFld,
+            firstName: $firstNameFld,
+            lastName: $lastNameFld,
+            role: $roleFld
+        };
+
+        fetch('http://localhost:8080/api/user', {
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+    }
+
     function findUserById() { … }
     function deleteUser() { … }
     function updateUser() { … }

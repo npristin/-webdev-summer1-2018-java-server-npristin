@@ -7,18 +7,20 @@
 
     var $removeBtn, $editBtn, $createBtn;
     var $userRowTemplate, $tbody;
-    var userService = new AdminUserServiceClient();
     $(main);
 
     function main() {
         $tbody = $('.wbdv-tbody');
         $userRowTemplate = $('.wbdv-template wbdv-user wbdv-hidden');
-        $('#wbdv-remove').click(createUser);
+        $('.wbdv-create').click(createUser);
+        $('#wbdv-remove').click(deleteUser);
         $('#wbdv-edit').click(updateUser);
 
     }
 
     function createUser() {
+        console.log("hey")
+
         $usernameFld = $('#usernameFld').val();
         $passwordFld = $('#passwordFld').val();
         $firstNameFld = $('#firstNameFld').val();
@@ -49,10 +51,10 @@
         });
     }
 
-    function findUserById() { … }
+    function findUserById() {}
 
-    function deleteUser() { … }
-    function updateUser() { … }
-    function renderUser(user) { … }
-    function renderUsers(users) { … }
+    function deleteUser() {}
+    function updateUser() {}
+    function renderUser(user) {}
+    function renderUsers(users) {}
 })();

@@ -17,6 +17,9 @@ public class User {
     private String role;
     private Date dateOfBirth;
 
+    public User() {
+    }
+
     public User(String username, String password, String firstName, String lastName, String phone, String email,
                 String role, Date dateOfBirth) {
         this.username = username;

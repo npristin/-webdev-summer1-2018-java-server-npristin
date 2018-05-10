@@ -17,4 +17,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    @GetMapping("/api/user/{userId}")
+    public User findUserById(@PathVariable("userId") int userId) {
+        return userRepository.findById(userId).get(0);
+    }
 }

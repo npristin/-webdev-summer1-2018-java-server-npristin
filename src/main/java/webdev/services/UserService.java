@@ -12,6 +12,12 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        userRepository.save(user);
+        return user;
+    }
+
     @GetMapping("/api/user")
     public List<User> findAllUsers() {
         return userRepository.findAll();

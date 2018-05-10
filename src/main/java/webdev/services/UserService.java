@@ -28,6 +28,21 @@ public class UserService {
         return userRepository.findById(userId).get(0);
     }
 
+    @PutMapping("/api/user/{userId}")
+    public void updateUser(@RequestBody User newUser, @PathVariable("userId") int userId) {
+        User user = userRepository.findById(userId).get(0);
+        user.setId(newUser.getId());
+        user.setUsername(newUser.getUsername());
+        user.setPassword(newUser.getPassword());
+        user.setFirstName(newUser.getFirstName());
+        user.setLastName(newUser.getLastName());
+        user.setEmail(newUser.getEmail());
+        user.setPhone(newUser.getPhone());
+        user.setRole(newUser.getRole());
+        user.setDateOfBirth(newUser.getDateOfBirth());
+        userRepository.save(user);
+    }
+
     @DeleteMapping("/api/user/{userId}")
     public void deleteUser(@PathVariable("userId") int userId) {
         User user = userRepository.findById(userId).get(0);

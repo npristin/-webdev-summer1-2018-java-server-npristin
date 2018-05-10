@@ -45,7 +45,6 @@ public class UserService {
 
     @DeleteMapping("/api/user/{userId}")
     public void deleteUser(@PathVariable("userId") int userId) {
-        User user = userRepository.findById(userId).get(0);
-        userRepository.delete(user);
+        userRepository.deleteById(userId);
     }
 }

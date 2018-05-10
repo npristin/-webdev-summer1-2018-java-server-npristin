@@ -19,7 +19,7 @@ public class UserService {
     }
 
     @GetMapping("/api/user")
-    public List<User> findAllUsers() {
+    public Iterable<User> findAllUsers() {
         return userRepository.findAll();
     }
 

@@ -11,4 +11,10 @@ import webdev.repositories.UserRepository;
 public class UserService {
     @Autowired
     UserRepository userRepository;
+
+    @GetMapping("/api/user")
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
+    }
+
 }

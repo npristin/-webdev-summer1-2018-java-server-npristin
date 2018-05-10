@@ -42,7 +42,15 @@
         });
     }
 
+    function findAllUsers() {
+        fetch('http://localhost:8080/api/user')
+            .then(function (response) {
+                return response.json();
+        });
+    }
+
     function findUserById() { … }
+
     function deleteUser() { … }
     function updateUser() { … }
     function renderUser(user) { … }

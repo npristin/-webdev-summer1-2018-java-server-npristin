@@ -12,7 +12,7 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    @PostMapping
+    @PostMapping("/api/user")
     public User createUser(@RequestBody User user) {
         userRepository.save(user);
         return user;

@@ -25,22 +25,31 @@ public class UserService {
 
     @GetMapping("/api/user/{userId}")
     public User findUserById(@PathVariable("userId") int userId) {
-        return userRepository.findById(userId).get(0);
+        Optional<User> potentialUser = userRepository.findById(userId);
+        if (potentialUser.isPresent()) {
+            return potentialUser.get();
+        }
+        return null;
     }
 
     @PutMapping("/api/user/{userId}")
-    public void updateUser(@RequestBody User newUser, @PathVariable("userId") int userId) {
-        User user = userRepository.findById(userId).get(0);
-        user.setId(newUser.getId());
-        user.setUsername(newUser.getUsername());
-        user.setPassword(newUser.getPassword());
-        user.setFirstName(newUser.getFirstName());
-        user.setLastName(newUser.getLastName());
-        user.setEmail(newUser.getEmail());
-        user.setPhone(newUser.getPhone());
-        user.setRole(newUser.getRole());
-        user.setDateOfBirth(newUser.getDateOfBirth());
-        userRepository.save(user);
+    public User updateUser(@RequestBody User newUser, @PathVariable("userId") int userId) {
+        Optional<User> potentialUser = userRepository.findById(userId);
+        if (potentialUser.isPresent()) {
+            User user = potentialUser.get();
+            user.setId(newUser.getId());
+            user.setUsername(newUser.getUsername());
+            user.setPassword(newUser.getPassword());
+            user.setFirstName(newUser.getFirstName());
+            user.setLastName(newUser.getLastName());
+            user.setEmail(newUser.getEmail());
+            user.setPhone(newUser.getPhone());
+            user.setRole(newUser.getRole());
+            user.setDateOfBirth(newUser.getDateOfBirth());
+            userRepository.save(user);
+            return user;
+        }
+        return null;
     }
 
     @DeleteMapping("/api/user/{userId}")

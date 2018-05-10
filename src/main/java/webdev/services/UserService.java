@@ -21,4 +21,10 @@ public class UserService {
     public User findUserById(@PathVariable("userId") int userId) {
         return userRepository.findById(userId).get(0);
     }
+
+    @DeleteMapping("/api/user/{userId}")
+    public void deleteUser(@PathVariable("userId") int userId) {
+        User user = userRepository.findById(userId).get(0);
+        userRepository.delete(user);
+    }
 }

@@ -41,5 +41,9 @@ function UserServiceClient() {
         });
     }
 
-    function deleteUser(userId, callback) {}
+    function deleteUser(userId, callback) {
+        fetch('http://localhost:8080/api/user/' + userId, {
+            method: 'delete'
+        });
+    }
 }

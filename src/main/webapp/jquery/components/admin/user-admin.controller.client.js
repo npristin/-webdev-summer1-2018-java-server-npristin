@@ -66,9 +66,7 @@
         console.log(userId);
         console.log('deleting user');
 
-        fetch('http://localhost:8080/api/user/' + userId, {
-            method: 'delete'
-        });
+        userService.deleteUser(userId);
         location.reload();
     }
 

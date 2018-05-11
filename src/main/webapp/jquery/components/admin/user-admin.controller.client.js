@@ -7,6 +7,7 @@
 
     var $removeBtn, $editBtn, $createBtn;
     var $userRowTemplate, $tbody;
+    var userService = new UserServiceClient();
     $(main);
 
     function main() {
@@ -43,13 +44,7 @@
             role: $roleFld
         };
 
-        fetch('http://localhost:8080/api/user', {
-            method: 'post',
-            body: JSON.stringify(user),
-            headers: {
-                'content-type': 'application/json'
-            }
-        });
+        userService.createUser(user);
         renderUser(user);
     }
 

@@ -18,8 +18,8 @@
         $editBtn = $('.wbdv-edit');
 
         $createBtn.click(createUser);
-        $('.wbdv-tbody').on('click', $removeBtn, deleteUser);
-        $('.wbdv-tbody').on('click', $editBtn, updateUser);
+        $('.wbdv-tbody').on('click', '.wbdv-remove', deleteUser);
+        $('.wbdv-tbody').on('click', '.wbdv-edit', updateUser);
 
         findAllUsers();
     }
@@ -79,7 +79,35 @@
         });
     }
 
-    function updateUser() {}
+    function updateUser(event) {
+        var userId = $(event.target)
+            .parent().parent().parent().attr("wbdv-user-id");
+        console.log(userId);
+        console.log('updating user');
+
+        $usernameFld = $('#usernameFld').val();
+        $passwordFld = $('#passwordFld').val();
+        $firstNameFld = $('#firstNameFld').val();
+        $lastNameFld = $('#lastNameFld').val();
+        $roleFld = $('#roleFld').val();
+
+        var user = {
+            id: userId,
+            username: $usernameFld,
+            password: $passwordFld,
+            firstName: $firstNameFld,
+            lastName: $lastNameFld,
+            role: $roleFld
+        };
+
+        fetch('http://localhost:8080/api/user/' + userId, {
+            method: 'put',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+    }
 
     function renderUser(user) {}
 

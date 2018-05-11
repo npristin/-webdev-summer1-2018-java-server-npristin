@@ -80,6 +80,7 @@
         fetch('http://localhost:8080/api/user/' + userId, {
             method: 'delete'
         });
+        location.reload();
     }
 
     function selectUser(event) {
@@ -114,6 +115,7 @@
                 'content-type': 'application/json'
             }
         });
+        location.reload();
     }
 
     function renderUser(user) {

@@ -59,7 +59,14 @@
         }).then(renderUsers);
     }
 
-    function findUserById() {}
+    function findUserById(userId) {
+        console.log("fetching user")
+
+        fetch('http://localhost:8080/api/user/' + userId)
+            .then(function (response) {
+                return response.json();
+        });
+    }
 
     function deleteUser(event) {
         var userId = $(event.target)

@@ -97,13 +97,7 @@
             role: $roleFld
         };
 
-        fetch('http://localhost:8080/api/user/' + userId, {
-            method: 'put',
-            body: JSON.stringify(user),
-            headers: {
-                'content-type': 'application/json'
-            }
-        });
+        userService.updateUser(userId, user);
         location.reload();
     }
 

@@ -30,7 +30,16 @@ function UserServiceClient() {
                 return response.json();
         });
     }
-    
-    function updateUser(userId, user, callback) {}
+
+    function updateUser(userId, user, callback) {
+        fetch('http://localhost:8080/api/user/' + userId, {
+            method: 'put',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+    }
+
     function deleteUser(userId, callback) {}
 }

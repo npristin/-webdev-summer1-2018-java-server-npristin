@@ -50,6 +50,7 @@
                 'content-type': 'application/json'
             }
         });
+        renderUser(user);
     }
 
     function findAllUsers() {
@@ -115,23 +116,25 @@
         });
     }
 
-    function renderUser(user) {}
+    function renderUser(user) {
+        var clone = $userRowTemplate.clone();
+        clone.find('.wbdv-username')
+            .html(user.username);
+        clone.find('.wbdv-first-name')
+            .html(user.firstName);
+        clone.find('.wbdv-last-name')
+            .html(user.lastName);
+        clone.find('.wbdv-role')
+            .html(user.role);
+        clone.attr('wbdv-user-id', user.id);
+
+        $tbody.append(clone);
+    }
 
     function renderUsers(users) {
         for(var i=0; i<users.length; i++) {
             var user = users[i];
-            var clone = $userRowTemplate.clone();
-            clone.find('.wbdv-username')
-                .html(user.username);
-            clone.find('.wbdv-first-name')
-                .html(user.firstName);
-            clone.find('.wbdv-last-name')
-                .html(user.lastName);
-            clone.find('.wbdv-role')
-                .html(user.role);
-            clone.attr('wbdv-user-id', user.id);
-
-            $tbody.append(clone);
+            renderUser(user);
         }
     }
 })();

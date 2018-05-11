@@ -12,14 +12,16 @@
     function main() {
         $tbody = $('.wbdv-tbody');
         $userRowTemplate = $('.wbdv-template');
-        $removeBtn = $('.wbdv-remove')
-        $('.wbdv-tbody').on('click', '.wbdv-remove', deleteUser);
+
+        $createBtn = $('.wbdv-create');
+        $removeBtn = $('.wbdv-remove');
+        $editBtn = $('.wbdv-edit');
+
+        $createBtn.click(createUser);
+        $('.wbdv-tbody').on('click', $removeBtn, deleteUser);
+        $('.wbdv-tbody').on('click', $editBtn, updateUser);
 
         findAllUsers();
-
-        $('.wbdv-edit').click(updateUser);
-        $('.wbdv-create').click(createUser);
-
     }
 
     function createUser() {

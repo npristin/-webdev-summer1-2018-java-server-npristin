@@ -17,9 +17,11 @@
         $removeBtn = $('.wbdv-remove');
         $editBtn = $('.wbdv-edit');
 
+        var userId = $('.wbdv-tbody').on('click', '.wbdv-edit', selectUser);
+
         $createBtn.click(createUser);
         $('.wbdv-tbody').on('click', '.wbdv-remove', deleteUser);
-        $('.wbdv-tbody').on('click', '.wbdv-edit', updateUser);
+        $('.wbdv-update').click(updateUser);
 
         findAllUsers();
     }
@@ -79,10 +81,14 @@
         });
     }
 
-    function updateUser(event) {
-        var userId = $(event.target)
+    function selectUser(event) {
+        userId = $(event.target)
             .parent().parent().parent().attr("wbdv-user-id");
         console.log(userId);
+        return userId;
+    }
+
+    function updateUser(event) {
         console.log('updating user');
 
         $usernameFld = $('#usernameFld').val();

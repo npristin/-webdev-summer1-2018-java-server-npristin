@@ -1,16 +1,26 @@
 (function () {
     var $usernameFld, $passwordFld, $verifyPasswordFld;
     var $registerBtn;
-    var userService = new UserService();
+    var userService = new UserServiceClient();
     $(main);
 
     function main() {
+        $registerBtn = $('#registerBtn');
+        $('#registerBtn').click(register);
+    }
+
+    function register() {
+        console.log('registering');
+
         $usernameFld = $('#usernameFld').val();
         $passwordFld = $('#passwordFld').val();
         $verifyPasswordFld = $('#verifyPasswordFld').val();
 
-        $registerBtn = $('#registerBtn');
+        var user = {
+            username: $usernameFld,
+            password: $passwordFld,
+        };
+
+        userService.createUser(user);
     }
-    
-    function register() { … }
 })();

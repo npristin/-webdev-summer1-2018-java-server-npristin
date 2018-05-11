@@ -11,13 +11,15 @@
 
     function main() {
         $tbody = $('.wbdv-tbody');
-        $userRowTemplate = $('.wbdv-hidden');
+        $userRowTemplate = $('.wbdv-template');
+        $removeBtn = $('.wbdv-remove')
+        $('.wbdv-tbody').on('click', '.wbdv-remove', deleteUser);
 
         findAllUsers();
 
+        $('.wbdv-edit').click(updateUser);
         $('.wbdv-create').click(createUser);
-        $('#wbdv-remove').click(deleteUser);
-        $('#wbdv-edit').click(updateUser);
+
     }
 
     function createUser() {
@@ -57,8 +59,19 @@
 
     function findUserById() {}
 
-    function deleteUser() {}
+    function deleteUser(event) {
+        var userId = $(event.target)
+            .parent().parent().parent().attr("wbdv-user-id");
+        console.log(userId);
+        console.log('deleting user');
+
+        fetch('http://localhost:8080/api/user/' + userId, {
+            method: 'delete'
+        });
+    }
+
     function updateUser() {}
+
     function renderUser(user) {}
 
     function renderUsers(users) {
@@ -72,7 +85,8 @@
             clone.find('.wbdv-last-name')
                 .html(user.lastName);
             clone.find('.wbdv-role')
-                .html(user.role)
+                .html(user.role);
+            clone.attr('wbdv-user-id', user.id);
 
             $tbody.append(clone);
         }

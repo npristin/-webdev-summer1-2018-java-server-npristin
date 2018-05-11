@@ -18,15 +18,19 @@ function UserServiceClient() {
     }
 
     function findAllUsers(callback) {
-        var users;
-
         return fetch('http://localhost:8080/api/user')
             .then(function (response) {
                 return response.json();
         });
     }
 
-    function findUserById(userId, callback) {}
+    function findUserById(userId, callback) {
+        fetch('http://localhost:8080/api/user/' + userId)
+            .then(function (response) {
+                return response.json();
+        });
+    }
+    
     function updateUser(userId, user, callback) {}
     function deleteUser(userId, callback) {}
 }

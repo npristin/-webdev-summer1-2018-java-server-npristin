@@ -57,10 +57,7 @@
     function findUserById(userId) {
         console.log("fetching user")
 
-        fetch('http://localhost:8080/api/user/' + userId)
-            .then(function (response) {
-                return response.json();
-        });
+        return userService.findUserById();
     }
 
     function deleteUser(event) {

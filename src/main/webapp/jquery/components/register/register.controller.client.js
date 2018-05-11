@@ -21,6 +21,6 @@
             password: $passwordFld,
         };
 
-        userService.createUser(user);
+        userService.register(user);
     }
 })();

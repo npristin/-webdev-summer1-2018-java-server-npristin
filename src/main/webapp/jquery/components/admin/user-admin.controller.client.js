@@ -51,10 +51,7 @@
     function findAllUsers() {
         console.log("find users")
 
-        fetch('http://localhost:8080/api/user')
-            .then(function (response) {
-                return response.json();
-        }).then(renderUsers);
+        userService.findAllUsers().then(renderUsers);
     }
 
     function findUserById(userId) {

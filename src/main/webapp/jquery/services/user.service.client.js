@@ -8,7 +8,7 @@ function UserServiceClient() {
     var self = this;
 
     function createUser(user, callback) {
-        fetch('http://localhost:8080/api/user', {
+        fetch(self.url, {
             method: 'post',
             body: JSON.stringify(user),
             headers: {
@@ -17,7 +17,15 @@ function UserServiceClient() {
         });
     }
 
-    function findAllUsers(callback) {}
+    function findAllUsers(callback) {
+        var users;
+
+        return fetch('http://localhost:8080/api/user')
+            .then(function (response) {
+                return response.json();
+        });
+    }
+
     function findUserById(userId, callback) {}
     function updateUser(userId, user, callback) {}
     function deleteUser(userId, callback) {}

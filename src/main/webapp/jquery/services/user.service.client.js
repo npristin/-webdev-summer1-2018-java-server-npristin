@@ -11,6 +11,7 @@ function UserServiceClient() {
     this.registerUrl = 'http://localhost:8080/api/register'
     this.loginUrl = 'http://localhost:8080/api/login'
     this.updateProfileUrl = 'http://localhost:8080/api/profile'
+    this.logoutUrl = 'http://localhost:8080/api/logout'
     var self = this;
 
     function createUser(user, callback) {
@@ -82,5 +83,11 @@ function UserServiceClient() {
             }
         });
     }
-    
+
+    function logout(callback) {
+        return fetch(self.logoutUrl, {
+            method: 'post'
+        });
+    }
+
 }

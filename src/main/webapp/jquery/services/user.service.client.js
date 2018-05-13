@@ -27,7 +27,7 @@ function UserServiceClient() {
     }
 
     function findUserById(userId, callback) {
-        fetch('http://localhost:8080/api/user/' + userId)
+        return fetch('http://localhost:8080/api/user/' + userId)
             .then(function (response) {
                 return response.json();
         });

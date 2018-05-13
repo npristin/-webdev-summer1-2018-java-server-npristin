@@ -18,11 +18,11 @@
         $removeBtn = $('.wbdv-remove');
         $editBtn = $('.wbdv-edit');
 
-        var userId = $('.wbdv-tbody').on('click', '.wbdv-edit', selectUser);
+        $editingUserId = $('.wbdv-tbody').on('click', '.wbdv-edit', selectUser);
 
         $createBtn.click(createUser);
         $('.wbdv-tbody').on('click', '.wbdv-remove', deleteUser);
-        $('.wbdv-update').click(updateUser);
+        $('.wbdv-update').click(findUserById);
 
         findAllUsers();
     }
@@ -54,11 +54,17 @@
         userService.findAllUsers().then(renderUsers);
     }
 
-    function findUserById(userId) {
-        console.log("fetching user")
+    function findUserById() {
+        console.log("fetching user");
 
-        return userService.findUserById();
-    }
+        if (typeof userId === "undefined") {
+           alert("No user selected for update");
+        }
+        else {
+            console.log(userId);
+            userService.findUserById(userId).then(updateUser);
+        }
+    };
 
     function deleteUser(event) {
         var userId = $(event.target)
@@ -77,8 +83,10 @@
         return userId;
     }
 
-    function updateUser(event) {
+    function updateUser(userResponse) {
         console.log('updating user');
+        console.log(userResponse);
+        console.log(userId);
 
         $usernameFld = $('#usernameFld').val();
         $passwordFld = $('#passwordFld').val();
@@ -86,14 +94,21 @@
         $lastNameFld = $('#lastNameFld').val();
         $roleFld = $('#roleFld').val();
 
-        var user = {
-            id: userId,
-            username: $usernameFld,
-            password: $passwordFld,
-            firstName: $firstNameFld,
-            lastName: $lastNameFld,
-            role: $roleFld
-        };
+        var user = new User();
+        user.setUsername(userResponse.username);
+        user.setPassword(userResponse.password);
+        user.setFirstName(userResponse.firstName);
+        user.setLastName(userResponse.lastName);
+        user.setEmail(userResponse.email);
+        user.setPhone(userResponse.phone);
+        user.setRole(userResponse.role);
+        user.setDateOfBirth(userResponse.dateOfBirth);
+
+        user.setUsername($usernameFld);
+        user.setPassword($passwordFld);
+        user.setFirstName($firstNameFld);
+        user.setLastName($lastNameFld);
+        user.setRole($roleFld);
 
         userService.updateUser(userId, user);
         location.reload();

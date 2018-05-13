@@ -1,4 +1,4 @@
-function User(username, password, firstName, lastName, email, phone, role, dateOfBirth) {
+function User(username, password, firstName, lastName, email, phone, role, dateOfBirth, id) {
   this.username = username;
   this.password = password;
   this.firstName = firstName;
@@ -24,6 +24,8 @@ function User(username, password, firstName, lastName, email, phone, role, dateO
   this.getRole = getRole;
   this.setDateOfBirth = setDateOfBirth;
   this.getDateOfBirth = getDateOfBirth;
+
+  var self = this;
 
   function setUsername(username) {
     this.username = username;

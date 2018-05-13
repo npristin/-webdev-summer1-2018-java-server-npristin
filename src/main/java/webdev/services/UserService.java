@@ -1,6 +1,8 @@
 package webdev.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
@@ -74,15 +76,16 @@ public class UserService {
     }
 
     @PostMapping("/api/login")
-    public User login(@RequestBody User user, HttpSession session) {
+    public ResponseEntity<User> login(@RequestBody User user, HttpSession session) {
         String username = user.getUsername();
         String password = user.getPassword();
 
         List<User> potentialuser = (List<User>) userRepository.findUserByCredentials(username, password);
+
         if (potentialuser.size() != 0) {
             session.setAttribute("user", user);
-            return user;
+            return new ResponseEntity<>(potentialuser.get(0), HttpStatus.OK);
         }
-        return null;
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

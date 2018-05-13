@@ -9,6 +9,7 @@ function UserServiceClient() {
 
     this.url = 'http://localhost:8080/api/user';
     this.registerUrl = 'http://localhost:8080/api/register'
+    this.loginUrl = 'http://localhost:8080/api/login'
     var self = this;
 
     function createUser(user, callback) {
@@ -61,7 +62,13 @@ function UserServiceClient() {
         });
     }
 
-    function login() {
-
+    function login(user, callback) {
+        return fetch(self.loginUrl, {
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
     }
 }

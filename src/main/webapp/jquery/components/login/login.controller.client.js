@@ -19,16 +19,20 @@
         user.setUsername($usernameFld);
         user.setPassword($passwordFld);
 
+        console.log(user);
+
         userService.login(user)
             .then(function (response) {
-                console.log(response);
-                if (response.ok) {
-                    window.location.href =
-                        'http://localhost:8080/jquery/components/profile/profile.template.client.html/'
-                            + '?user=' + $usernameFld;
+                return response.text().then(function(text) {
+                    return text ? JSON.parse(text) : {}
+                })
+            }).then(function (json) {
+                if (jQuery.isEmptyObject(json)) {
+                    alert("Invalid username and password!");
                 } else {
-                    alert('Invalid username and password!');
+                    window.location.href =
+                        'http://localhost:8080/jquery/components/profile/profile.template.client.html';
                 }
-        });
+            });
     }
 })();

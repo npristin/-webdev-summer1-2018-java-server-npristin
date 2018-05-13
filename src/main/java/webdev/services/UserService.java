@@ -76,7 +76,7 @@ public class UserService {
     }
 
     @PostMapping("/api/login")
-    public ResponseEntity<User> login(@RequestBody User user, HttpSession session) {
+    public User login(@RequestBody User user, HttpSession session) {
         String username = user.getUsername();
         String password = user.getPassword();
 
@@ -84,11 +84,10 @@ public class UserService {
 
         if (potentialuser.size() != 0) {
             session.setAttribute("user", potentialuser.get(0));
-            return new ResponseEntity<>(potentialuser.get(0), HttpStatus.OK);
+            return potentialuser.get(0);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return null;
     }
-
 
     @PutMapping("/api/profile")
     public User updateProfile(@RequestBody User user, HttpSession session) {

@@ -7,6 +7,8 @@ import java.util.*;
 import webdev.models.User;
 import webdev.repositories.UserRepository;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 public class UserService {
     @Autowired
@@ -59,10 +61,16 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
-//    User findUserByUsername(String username) {
-//        return (User) userRepository.findUserByUsername(username);
-//    }
-//
-//    @PostMapping("/api/register")
+
+    @PostMapping("/api/register")
+    public User register(@RequestBody User user, HttpSession session) {
+        List<User> newUser = (List<User>) userRepository.findUserByUsername(user.getUsername());
+        if (newUser.size() == 0) {
+            userRepository.save(user);
+            session.setAttribute("user", user);
+            return user;
+        }
+        return null;
+    }
 
 }

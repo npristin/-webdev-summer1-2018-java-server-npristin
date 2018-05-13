@@ -83,9 +83,27 @@ public class UserService {
         List<User> potentialuser = (List<User>) userRepository.findUserByCredentials(username, password);
 
         if (potentialuser.size() != 0) {
-            session.setAttribute("user", user);
+            session.setAttribute("user", potentialuser.get(0));
             return new ResponseEntity<>(potentialuser.get(0), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+
+    @PutMapping("/api/profile")
+    public User updateProfile(@RequestBody User user, HttpSession session) {
+        Object sessionObj = session.getAttribute("user");
+        if (sessionObj != null) {
+            User sessionUser = (User) sessionObj;
+
+            sessionUser.setPhone(user.getPhone());
+            sessionUser.setEmail(user.getEmail());
+            sessionUser.setRole(user.getRole());
+            sessionUser.setDateOfBirth(user.getDateOfBirth());
+            userRepository.save(sessionUser);
+            return sessionUser;
+        }
+        return null;
+    }
+
 }

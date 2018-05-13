@@ -16,11 +16,13 @@
         $passwordFld = $('#passwordFld').val();
         $verifyPasswordFld = $('#verifyPasswordFld').val();
 
-        var user = {
-            username: $usernameFld,
-            password: $passwordFld,
-        };
+        if ($passwordFld == $verifyPasswordFld) {
+            var user = {
+                username: $usernameFld,
+                password: $passwordFld,
+            };
 
-        userService.register(user);
+            userService.register(user);
+        }
     }
 })();

@@ -24,7 +24,8 @@
                 console.log(response);
                 if (response.ok) {
                     window.location.href =
-                        'http://localhost:8080/jquery/components/register/register.template.client.html';
+                        'http://localhost:8080/jquery/components/profile/profile.template.client.html/'
+                            + '?user=' + $usernameFld;
                 } else {
                     alert('Invalid username and password!');
                 }

@@ -21,11 +21,8 @@ public class UserService {
     }
 
     @GetMapping("/api/user")
-    public List<User> findAllUsers(@RequestParam(name="username", required = false) String username,
-                                   @RequestParam(name="password", required = false) String password) {
-        if (username != null && password != null) {
-            return (List<User>) userRepository.findUserByCredentials(username, password);
-        } else if (username != null) {
+    public List<User> findAllUsers(@RequestParam(name="username", required = false) String username) {
+        if (username != null) {
             return (List<User>) userRepository.findUserByUsername(username);
         }
         return (List<User>) userRepository.findAll();
@@ -76,4 +73,16 @@ public class UserService {
         return null;
     }
 
+    @PostMapping("/api/login")
+    public User login(@RequestBody User user, HttpSession session) {
+        String username = user.getUsername();
+        String password = user.getPassword();
+
+        List<User> potentialuser = (List<User>) userRepository.findUserByCredentials(username, password);
+        if (potentialuser.size() != 0) {
+            session.setAttribute("user", user);
+            return user;
+        }
+        return null;
+    }
 }

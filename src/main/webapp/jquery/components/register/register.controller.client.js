@@ -23,6 +23,8 @@
             };
 
             userService.register(user);
+        } else {
+            alert("Passwords do not match!")
         }
     }
 })();

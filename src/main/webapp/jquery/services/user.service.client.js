@@ -55,7 +55,7 @@ function UserServiceClient() {
     }
 
     function register(user, callback) {
-        fetch(self.registerUrl, {
+        return fetch(self.registerUrl, {
             method: 'post',
             body: JSON.stringify(user),
             headers: {
@@ -85,9 +85,8 @@ function UserServiceClient() {
     }
 
     function logout(callback) {
-        return fetch(self.logoutUrl, {
+        fetch(self.logoutUrl, {
             method: 'post'
         });
     }
-
 }

@@ -22,7 +22,20 @@
                 password: $passwordFld,
             };
 
-            userService.register(user);
+            userService.register(user)
+                .then(function (response) {
+                    return response.text().then(function(text) {
+                        return text ? JSON.parse(text) : {}
+                    })
+                }).then(function (json) {
+                    if (jQuery.isEmptyObject(json)) {
+                        alert("This username is already taken!");
+                    } else {
+                        console.log("Username is available!");
+                        window.location.href =
+                            'http://localhost:8080/jquery/components/profile/profile.template.client.html';
+                    }
+                });
         } else {
             alert("Passwords do not match!")
         }

@@ -30,8 +30,10 @@
                 if (jQuery.isEmptyObject(json)) {
                     alert("Invalid username and password!");
                 } else {
+                    var userId = json.id;
                     window.location.href =
-                        'http://localhost:8080/jquery/components/profile/profile.template.client.html';
+                        'http://localhost:8080/jquery/components/profile/profile.template.client.html'
+                            + '?userId=' + userId;
                 }
             });
     }

@@ -19,7 +19,10 @@ public class UserService {
     }
 
     @GetMapping("/api/user")
-    public List<User> findAllUsers() {
+    public List<User> findAllUsers(@RequestParam(name="username", required = false) String username) {
+        if (username != null) {
+            return (List<User>) userRepository.findUserByUsername(username);
+        }
         return (List<User>) userRepository.findAll();
     }
 
@@ -37,7 +40,6 @@ public class UserService {
         Optional<User> potentialUser = userRepository.findById(userId);
         if (potentialUser.isPresent()) {
             User user = potentialUser.get();
-            user.setId(newUser.getId());
             user.setUsername(newUser.getUsername());
             user.setPassword(newUser.getPassword());
             user.setFirstName(newUser.getFirstName());
@@ -56,4 +58,11 @@ public class UserService {
     public void deleteUser(@PathVariable("userId") int userId) {
         userRepository.deleteById(userId);
     }
+
+//    User findUserByUsername(String username) {
+//        return (User) userRepository.findUserByUsername(username);
+//    }
+//
+//    @PostMapping("/api/register")
+
 }

@@ -10,6 +10,7 @@ function UserServiceClient() {
     this.url = 'http://localhost:8080/api/user';
     this.registerUrl = 'http://localhost:8080/api/register'
     this.loginUrl = 'http://localhost:8080/api/login'
+    this.updateProfileUrl = 'http://localhost:8080/api/profile'
     var self = this;
 
     function createUser(user, callback) {
@@ -71,4 +72,15 @@ function UserServiceClient() {
             }
         });
     }
+
+    function updateProfile(user, callback) {
+        return fetch(self.updateProfileUrl, {
+            method: 'put',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+    }
+    
 }

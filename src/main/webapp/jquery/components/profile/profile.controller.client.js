@@ -14,6 +14,12 @@
         retrieveUserData();
     }
 
+    function logout() {
+        console.log("logging out");
+        userService.logout;
+        window.location.href = 'http://localhost:8080/jquery/components/login/login.template.client.html';
+    }
+
     function retrieveUserData() {
         // parses query parameters to get userId, these 3 lines of code are used in reference from:
         // https://forums.asp.net/t/1903621.aspx?how+can+I+get+two+parameters+values+from+Query+string+using+jquery+

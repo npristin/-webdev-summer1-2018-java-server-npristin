@@ -3,7 +3,7 @@ package webdev.models;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+@Entity(name="user")
 public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

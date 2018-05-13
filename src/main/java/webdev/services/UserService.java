@@ -21,8 +21,11 @@ public class UserService {
     }
 
     @GetMapping("/api/user")
-    public List<User> findAllUsers(@RequestParam(name="username", required = false) String username) {
-        if (username != null) {
+    public List<User> findAllUsers(@RequestParam(name="username", required = false) String username,
+                                   @RequestParam(name="password", required = false) String password) {
+        if (username != null && password != null) {
+            return (List<User>) userRepository.findUserByCredentials(username, password);
+        } else if (username != null) {
             return (List<User>) userRepository.findUserByUsername(username);
         }
         return (List<User>) userRepository.findAll();

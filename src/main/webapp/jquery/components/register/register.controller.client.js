@@ -31,9 +31,11 @@
                     if (jQuery.isEmptyObject(json)) {
                         alert("This username is already taken!");
                     } else {
+                        console.log(json.id);
                         console.log("Username is available!");
                         window.location.href =
-                            'http://localhost:8080/jquery/components/profile/profile.template.client.html';
+                            'http://localhost:8080/jquery/components/profile/profile.template.client.html'
+                                + '?userId=' + json.id;
                     }
                 });
         } else {

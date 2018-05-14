@@ -75,7 +75,7 @@ function UserServiceClient() {
     }
 
     function updateProfile(user, callback) {
-        return fetch(self.updateProfileUrl, {
+        fetch(self.updateProfileUrl, {
             method: 'put',
             body: JSON.stringify(user),
             headers: {

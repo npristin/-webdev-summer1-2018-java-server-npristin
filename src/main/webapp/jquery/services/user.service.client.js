@@ -9,11 +9,11 @@ function UserServiceClient() {
     this.updateProfile = updateProfile;
     this.logout = logout;
 
-    this.url = 'http://localhost:8080/api/user';
-    this.registerUrl = 'http://localhost:8080/api/register'
-    this.loginUrl = 'http://localhost:8080/api/login'
-    this.updateProfileUrl = 'http://localhost:8080/api/profile'
-    this.logoutUrl = 'http://localhost:8080/api/logout'
+    this.url = 'https://webdev-summer1-2018-npristin.herokuapp.com/api/user';
+    this.registerUrl = 'https://webdev-summer1-2018-npristin.herokuapp.com/api/register'
+    this.loginUrl = 'https://webdev-summer1-2018-npristin.herokuapp.com/api/login'
+    this.updateProfileUrl = 'https://webdev-summer1-2018-npristin.herokuapp.com/api/profile'
+    this.logoutUrl = 'https://webdev-summer1-2018-npristin.herokuapp.com/api/logout'
     var self = this;
 
     function createUser(user, callback) {

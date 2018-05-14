@@ -32,7 +32,7 @@
                 } else {
                     var userId = json.id;
                     window.location.href =
-                        'http://localhost:8080/jquery/components/profile/profile.template.client.html'
+                        'https://webdev-summer1-2018-npristin.herokuapp.com/jquery/components/profile/profile.template.client.html'
                             + '?userId=' + userId;
                 }
             });

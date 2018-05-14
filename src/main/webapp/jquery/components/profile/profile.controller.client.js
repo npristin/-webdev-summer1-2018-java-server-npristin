@@ -37,7 +37,7 @@
                 'content-type': 'application/json'
             }
         });
-        location.reload();
+        alert('Profile successfully saved!');
     }
 
     function logout() {

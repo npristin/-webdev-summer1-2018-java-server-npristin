@@ -135,6 +135,7 @@
         clone.find('.wbdv-role')
             .html(user.role);
         clone.attr('wbdv-user-id', user.id);
+        clone.removeClass("wbdv-hidden");
 
         $tbody.append(clone);
     }

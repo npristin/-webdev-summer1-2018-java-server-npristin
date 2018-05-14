@@ -80,7 +80,17 @@
         userId = $(event.target)
             .parent().parent().parent().attr("wbdv-user-id");
         console.log(userId);
-        return userId;
+
+        userService.findUserById(userId)
+            .then(function (userResponse) {
+                $('#usernameFld').val(userResponse.username);
+                $('#passwordFld').val(userResponse.password);
+                $('#firstNameFld').val(userResponse.firstName);
+                $('#lastNameFld').val(userResponse.lastName);
+                $('#roleFld').val(userResponse.role);
+
+                return userId;
+            })
     }
 
     function updateUser(userResponse) {

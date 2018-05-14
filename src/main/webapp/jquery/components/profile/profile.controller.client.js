@@ -28,15 +28,7 @@
         user.setRole($roleFld);
         user.setDateOfBirth($dateOfBirthFld);
 
-        //userService.updateProfile(user);
-        console.log(user);
-        fetch('http://localhost:8080/api/profile', {
-            method: 'put',
-            body: JSON.stringify(user),
-            headers: {
-                'content-type': 'application/json'
-            }
-        });
+        userService.updateProfile(user);
         alert('Profile successfully saved!');
     }
 

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="profile.style.client.css">
     <script src="../../services/user.service.client.js"></script>
     <script src="profile.controller.client.js"></script>
     <script src="../../models/user.model.client.js"></script>
@@ -49,14 +50,11 @@
             <label for="dateOfBirth" class="col-sm-2 col-form-label">
                 Date of Birth </label>
             <div class="col-sm-10">
-                <input id="dateOfBirth" type="date">
+                <input id="dateOfBirth" type="date" style="width:250px">
             </div>
         </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label"></label>
-                <button id="update" class="btn btn-primary btn-block" type="button">Update</button>
-                <button id="logout" class="btn btn-primary btn-block" type="button">Logout</button>
-        </div>
+        <div><button id="update" class="btn btn-primary btn-block" type="button">Update</button></div>
+        <div><button id="logout" class="btn btn-primary btn-block" type="button">Logout</button></div>
     </form>
 </div>
 

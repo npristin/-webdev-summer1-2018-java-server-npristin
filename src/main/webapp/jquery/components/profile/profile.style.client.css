@@ -1,26 +1,10 @@
 #update {
     background-color: #3CB371;
-    width: 250px;
-    margin-top: 20px;
-    padding: 10px;
     color: white;
 }
 
 #logout {
     background-color:red;
-    width: 250px;
-    margin-top: 5px;
-    padding: 10px;
     color: white;
-}
-
-.form-control {
-    width: 250px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    padding: 5px;
-}
-
-#username {
-    background-color: #D3D3D3;
+    margin-top: 10px;
 }

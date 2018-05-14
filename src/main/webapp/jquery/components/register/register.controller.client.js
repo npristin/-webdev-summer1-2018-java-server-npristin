@@ -34,7 +34,7 @@
                         console.log(json.id);
                         console.log("Username is available!");
                         window.location.href =
-                            'https://webdev-summer1-2018-npristin.herokuapp.com/jquery/components/profile/profile.template.client.html'
+                            '/jquery/components/profile/profile.template.client.html'
                                 + '?userId=' + json.id;
                     }
                 });

@@ -35,7 +35,7 @@
     function logout() {
         console.log("logging out");
         userService.logout;
-        window.location.href = 'https://webdev-summer1-2018-npristin.herokuapp.com/jquery/components/login/login.template.client.html';
+        window.location.href = '/jquery/components/login/login.template.client.html';
     }
 
     function retrieveUserData() {

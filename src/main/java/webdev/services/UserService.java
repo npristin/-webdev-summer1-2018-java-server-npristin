@@ -9,6 +9,7 @@ import java.util.*;
 import webdev.models.User;
 import webdev.repositories.UserRepository;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -65,40 +66,39 @@ public class UserService {
 
 
     @PostMapping("/api/register")
-    public User register(@RequestBody User user, HttpSession session) {
+    public User register(@RequestBody User user, HttpServletRequest request) {
         List<User> newUser = (List<User>) userRepository.findUserByUsername(user.getUsername());
         if (newUser.size() == 0) {
             userRepository.save(user);
-            session.setAttribute("user", user);
+            request.getServletContext().setAttribute("user", user);
             return user;
         }
         return null;
     }
 
     @PostMapping("/api/login")
-    public User login(@RequestBody User user, HttpSession session) {
+    public User login(@RequestBody User user, HttpServletRequest request) {
         String username = user.getUsername();
         String password = user.getPassword();
 
         List<User> potentialuser = (List<User>) userRepository.findUserByCredentials(username, password);
 
         if (potentialuser.size() != 0) {
-            session.setAttribute("user", potentialuser.get(0));
+            request.getServletContext().setAttribute("user", potentialuser.get(0));
             return potentialuser.get(0);
         }
         return null;
     }
 
     @PutMapping("/api/profile")
-    public User updateProfile(@RequestBody User user, HttpSession session) {
-        Object sessionObj = session.getAttribute("user");
-        if (sessionObj != null) {
-            User sessionUser = (User) sessionObj;
-
+    public User updateProfile(@RequestBody User user, HttpServletRequest request) {
+        User sessionUser = (User) request.getServletContext().getAttribute("user");
+        if (sessionUser != null) {
             sessionUser.setPhone(user.getPhone());
             sessionUser.setEmail(user.getEmail());
             sessionUser.setRole(user.getRole());
             sessionUser.setDateOfBirth(user.getDateOfBirth());
+
             userRepository.save(sessionUser);
             return sessionUser;
         }

@@ -64,7 +64,7 @@
         console.log('deleting user');
 
         userService.deleteUser(userId);
-        findAllUsers();
+        location.reload();
     }
 
     function selectUser(event) {

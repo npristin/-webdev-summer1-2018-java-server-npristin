@@ -63,7 +63,11 @@
             $('#phone').val(userResponse.phone);
             $('#email').val(userResponse.email);
             $('#role').val(userResponse.role);
-            $('#dateOfBirth').val(userResponse.dateOfBirth.substr(0, userResponse.dateOfBirth.indexOf("T")));
+            if (userResponse.dateOfBirth !== null) {
+                $('#dateOfBirth').val(userResponse.dateOfBirth.substr(0, userResponse.dateOfBirth.indexOf("T")));
+            } else {
+                $('#dateOfBirth').val();
+            }
         });
     }
 })();

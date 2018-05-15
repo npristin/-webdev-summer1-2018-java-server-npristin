@@ -79,7 +79,7 @@ public class UserService {
         String username = user.getUsername();
         String password = user.getPassword();
 
-        List<User> potentialuser = (List<User>) userRepository.findUserByCredentials(username, password);
+        List<User> potentialuser = (List<User>) userRepository.findUserByUsernameAndPassword(username, password);
 
         if (potentialuser.size() != 0) {
             request.getServletContext().setAttribute("user", potentialuser.get(0));

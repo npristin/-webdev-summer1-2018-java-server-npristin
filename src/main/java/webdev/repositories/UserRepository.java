@@ -11,6 +11,6 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     Iterable<User> findUserByUsername(@Param("username") String u);
 
     @Query("SELECT u FROM user u WHERE u.username=:username AND u.password=:password")
-    Iterable<User> findUserByCredentials(@Param("username") String username,
+    Iterable<User> findUserByUsernameAndPassword(@Param("username") String username,
                                          @Param("password") String password);
 }

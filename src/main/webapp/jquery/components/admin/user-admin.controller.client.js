@@ -22,9 +22,9 @@
 
         $createBtn.click(createUser);
         $('.wbdv-tbody').on('click', '.wbdv-remove', deleteUser);
-        $('.wbdv-update').click(findUserById);
+        $('.wbdv-update').click(updateUser);
 
-        findAllUsers();
+        findAllUsers().then(renderUsers);
     }
 
     function createUser() {
@@ -50,36 +50,26 @@
 
     function findAllUsers() {
         console.log("find users")
-
-        userService.findAllUsers().then(renderUsers);
+        return userService.findAllUsers();
     }
 
     function findUserById() {
         console.log("fetching user");
-
-        if (typeof userId === "undefined") {
-           alert("No user selected for update");
-        }
-        else {
-            console.log(userId);
-            userService.findUserById(userId).then(updateUser);
-        }
+        return userService.findUserById(userId);
     };
 
     function deleteUser(event) {
         var userId = $(event.target)
             .parent().parent().parent().attr("wbdv-user-id");
-        console.log(userId);
         console.log('deleting user');
 
         userService.deleteUser(userId);
-        location.reload();
+        findAllUsers();
     }
 
     function selectUser(event) {
         userId = $(event.target)
             .parent().parent().parent().attr("wbdv-user-id");
-        console.log(userId);
 
         userService.findUserById(userId)
             .then(function (userResponse) {
@@ -93,35 +83,39 @@
             })
     }
 
-    function updateUser(userResponse) {
-        console.log('updating user');
-        console.log(userResponse);
-        console.log(userId);
+    function updateUser() {
+        if (typeof userId === "undefined") {
+           alert("No user selected for update");
+        } else {
+            findUserById(userId).then(function (userResponse) {
+                console.log('updating user');
 
-        $usernameFld = $('#usernameFld').val();
-        $passwordFld = $('#passwordFld').val();
-        $firstNameFld = $('#firstNameFld').val();
-        $lastNameFld = $('#lastNameFld').val();
-        $roleFld = $('#roleFld').val();
+                $usernameFld = $('#usernameFld').val();
+                $passwordFld = $('#passwordFld').val();
+                $firstNameFld = $('#firstNameFld').val();
+                $lastNameFld = $('#lastNameFld').val();
+                $roleFld = $('#roleFld').val();
 
-        var user = new User();
-        user.setUsername(userResponse.username);
-        user.setPassword(userResponse.password);
-        user.setFirstName(userResponse.firstName);
-        user.setLastName(userResponse.lastName);
-        user.setEmail(userResponse.email);
-        user.setPhone(userResponse.phone);
-        user.setRole(userResponse.role);
-        user.setDateOfBirth(userResponse.dateOfBirth);
+                var user = new User();
+                user.setUsername(userResponse.username);
+                user.setPassword(userResponse.password);
+                user.setFirstName(userResponse.firstName);
+                user.setLastName(userResponse.lastName);
+                user.setEmail(userResponse.email);
+                user.setPhone(userResponse.phone);
+                user.setRole(userResponse.role);
+                user.setDateOfBirth(userResponse.dateOfBirth);
 
-        user.setUsername($usernameFld);
-        user.setPassword($passwordFld);
-        user.setFirstName($firstNameFld);
-        user.setLastName($lastNameFld);
-        user.setRole($roleFld);
+                user.setUsername($usernameFld);
+                user.setPassword($passwordFld);
+                user.setFirstName($firstNameFld);
+                user.setLastName($lastNameFld);
+                user.setRole($roleFld);
 
-        userService.updateUser(userId, user);
-        location.reload();
+                userService.updateUser(userId, user);
+                location.reload();
+            });
+        }
     }
 
     function renderUser(user) {

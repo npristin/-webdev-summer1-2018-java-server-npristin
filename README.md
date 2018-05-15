@@ -10,4 +10,4 @@ Register Page: [Register](https://webdev-summer1-2018-npristin.herokuapp.com/jqu
 
 Login Page: [Login](https://webdev-summer1-2018-npristin.herokuapp.com/jquery/components/login/login.template.client.html)
 
-Profile Page (No user associated): [Profile](https://webdev-summer1-2018-npristin.herokuapp.com/jquery/components/profile/profile.template.client.html)
+Profile Page - Please access this page through registration or login.

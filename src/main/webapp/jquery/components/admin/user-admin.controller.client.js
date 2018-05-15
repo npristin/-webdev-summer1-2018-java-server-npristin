@@ -97,20 +97,15 @@
                 $roleFld = $('#roleFld').val();
 
                 var user = new User();
-                user.setUsername(userResponse.username);
-                user.setPassword(userResponse.password);
-                user.setFirstName(userResponse.firstName);
-                user.setLastName(userResponse.lastName);
-                user.setEmail(userResponse.email);
-                user.setPhone(userResponse.phone);
-                user.setRole(userResponse.role);
-                user.setDateOfBirth(userResponse.dateOfBirth);
-
                 user.setUsername($usernameFld);
                 user.setPassword($passwordFld);
                 user.setFirstName($firstNameFld);
                 user.setLastName($lastNameFld);
                 user.setRole($roleFld);
+
+                user.setEmail(userResponse.email);
+                user.setPhone(userResponse.phone);
+                user.setDateOfBirth(userResponse.dateOfBirth);
 
                 userService.updateUser(userId, user);
                 location.reload();

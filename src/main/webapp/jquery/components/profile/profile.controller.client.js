@@ -63,7 +63,7 @@
             $('#phone').val(userResponse.phone);
             $('#email').val(userResponse.email);
             $('#role').val(userResponse.role);
-            $('#dateOfBirth').val(userResponse.dateOfBirth);
+            $('#dateOfBirth').val(userResponse.dateOfBirth.substr(0, userResponse.dateOfBirth.indexOf("T")));
         });
     }
 })();

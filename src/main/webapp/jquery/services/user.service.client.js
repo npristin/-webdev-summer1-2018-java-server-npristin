@@ -19,6 +19,7 @@ function UserServiceClient() {
     function createUser(user, callback) {
         fetch(self.url, {
             method: 'post',
+            credentials: 'same-origin',
             body: JSON.stringify(user),
             headers: {
                 'content-type': 'application/json'
@@ -27,14 +28,18 @@ function UserServiceClient() {
     }
 
     function findAllUsers(callback) {
-        return fetch(self.url)
+        return fetch(self.url, {
+            credentials: 'same-origin'
+            })
             .then(function (response) {
                 return response.json();
         });
     }
 
     function findUserById(userId, callback) {
-        return fetch(self.url + '/' + userId)
+        return fetch(self.url + '/' + userId, {
+            credentials: 'same-origin'
+            })
             .then(function (response) {
                 return response.json();
         });
@@ -43,6 +48,7 @@ function UserServiceClient() {
     function updateUser(userId, user, callback) {
         fetch(self.url + '/' + userId, {
             method: 'put',
+            credentials: 'same-origin',
             body: JSON.stringify(user),
             headers: {
                 'content-type': 'application/json'
@@ -52,13 +58,15 @@ function UserServiceClient() {
 
     function deleteUser(userId, callback) {
         fetch(self.url + '/' + userId, {
-            method: 'delete'
+            method: 'delete',
+            credentials: 'same-origin'
         });
     }
 
     function register(user, callback) {
         return fetch(self.registerUrl, {
             method: 'post',
+            credentials: 'same-origin',
             body: JSON.stringify(user),
             headers: {
                 'content-type': 'application/json'
@@ -69,6 +77,7 @@ function UserServiceClient() {
     function login(user, callback) {
         return fetch(self.loginUrl, {
             method: 'post',
+            credentials: 'same-origin',
             body: JSON.stringify(user),
             headers: {
                 'content-type': 'application/json'
@@ -79,6 +88,7 @@ function UserServiceClient() {
     function updateProfile(user, callback) {
         fetch(self.updateProfileUrl, {
             method: 'put',
+            credentials: 'same-origin',
             body: JSON.stringify(user),
             headers: {
                 'content-type': 'application/json'
@@ -88,7 +98,8 @@ function UserServiceClient() {
 
     function logout(callback) {
         fetch(self.logoutUrl, {
-            method: 'post'
+            method: 'post',
+            credentials: 'same-origin',
         });
     }
 }

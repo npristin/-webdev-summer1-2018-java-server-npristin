@@ -7,7 +7,6 @@ import java.util.*;
 import webdev.models.User;
 import webdev.repositories.UserRepository;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -64,33 +63,33 @@ public class UserService {
 
 
     @PostMapping("/api/register")
-    public User register(@RequestBody User user, HttpServletRequest request) {
+    public User register(@RequestBody User user, HttpSession session) {
         List<User> newUser = (List<User>) userRepository.findUserByUsername(user.getUsername());
         if (newUser.size() == 0) {
             userRepository.save(user);
-            request.getServletContext().setAttribute("user", user);
+            session.setAttribute("user", user);
             return user;
         }
         return null;
     }
 
     @PostMapping("/api/login")
-    public User login(@RequestBody User user, HttpServletRequest request) {
+    public User login(@RequestBody User user, HttpSession session) {
         String username = user.getUsername();
         String password = user.getPassword();
 
         List<User> potentialuser = (List<User>) userRepository.findUserByUsernameAndPassword(username, password);
 
         if (potentialuser.size() != 0) {
-            request.getServletContext().setAttribute("user", potentialuser.get(0));
+            session.setAttribute("user", potentialuser.get(0));
             return potentialuser.get(0);
         }
         return null;
     }
 
     @PutMapping("/api/profile")
-    public User updateProfile(@RequestBody User user, HttpServletRequest request) {
-        User sessionUser = (User) request.getServletContext().getAttribute("user");
+    public User updateProfile(@RequestBody User user, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("user");
         if (sessionUser != null) {
             sessionUser.setPhone(user.getPhone());
             sessionUser.setEmail(user.getEmail());

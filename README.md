@@ -6,7 +6,7 @@ By: Nicole Pristin
 ## Links to Live System - Heroku
 User Admin Page: [User Admin](https://cs4550-java-server-npristin.herokuapp.com/jquery/components/admin/user-admin.template.client.html)
 
-Register Page: [Register](https://webdev-summer1-2018-npristin.herokuapp.com/jquery/components/register/register.template.client.html)
+Register Page: [Register](https://cs4550-java-server-npristin.herokuapp.com/jquery/components/register/register.template.client.html)
 
 Login Page: [Login](https://cs4550-java-server-npristin.herokuapp.com/jquery/components/register/register.template.client.html)
 

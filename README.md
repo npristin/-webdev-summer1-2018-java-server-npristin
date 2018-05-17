@@ -8,6 +8,6 @@ User Admin Page: [User Admin](https://cs4550-java-server-npristin.herokuapp.com/
 
 Register Page: [Register](https://cs4550-java-server-npristin.herokuapp.com/jquery/components/register/register.template.client.html)
 
-Login Page: [Login](https://cs4550-java-server-npristin.herokuapp.com/jquery/components/register/register.template.client.html)
+Login Page: [Login](https://cs4550-java-server-npristin.herokuapp.com/jquery/components/login/login.template.client.html)
 
 Profile Page - Please access this page through registration or login.

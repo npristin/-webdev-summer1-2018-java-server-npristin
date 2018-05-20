@@ -25,5 +25,9 @@ public class CourseService {
         return course;
     }
 
-    
+    @DeleteMapping("/api/course/{id}")
+    public void deleteCourse(@PathVariable("id") int courseId) {
+        courseRepository.deleteById(courseId);
+    }
+
 }

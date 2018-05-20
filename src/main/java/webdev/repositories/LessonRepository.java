@@ -1,4 +1,7 @@
 package webdev.repositories;
 
-public interface LessonRepository {
+import org.springframework.data.repository.CrudRepository;
+import webdev.models.Lesson;
+
+public interface LessonRepository extends CrudRepository<Lesson, Integer> {
 }

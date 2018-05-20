@@ -30,4 +30,9 @@ public class CourseService {
         courseRepository.deleteById(courseId);
     }
 
+    @GetMapping("/api/course")
+    public List<Course> findAllCourses() {
+        return (List<Course>) courseRepository.findAll();
+    }
+
 }

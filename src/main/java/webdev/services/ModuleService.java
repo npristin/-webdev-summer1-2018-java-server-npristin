@@ -54,4 +54,14 @@ public class ModuleService {
         return null;
     }
 
+    @GetMapping("/api/course/{cid}/module")
+    public List<Module> findAllModulesForCourse(@PathVariable("cid") int courseId) {
+        Optional<Course> potentialCourse = courseRepository.findById(courseId);
+        if (potentialCourse.isPresent()) {
+            Course course = potentialCourse.get();
+            return course.getModules();
+        }
+        return null;
+    }
+
 }

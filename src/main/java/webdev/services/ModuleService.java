@@ -35,4 +35,9 @@ public class ModuleService {
         return module;
     }
 
+    @DeleteMapping("/api/module/{id}")
+    public void deleteModule(@PathVariable("id") int moduleId) {
+        moduleRepository.deleteById(moduleId);
+    }
+
 }

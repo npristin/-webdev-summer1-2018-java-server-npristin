@@ -44,4 +44,18 @@ public class CourseService {
         return null;
     }
 
+    @PutMapping("/api/course/{id}")
+    public Course updateCourse(@RequestBody Course newCourse, @PathVariable("id") int courseId) {
+        Optional<Course> potentialCourse = courseRepository.findById(courseId);
+        if (potentialCourse.isPresent()) {
+            Course course = potentialCourse.get();
+            course.setTitle(newCourse.getTitle());
+
+            Date date = new Date();
+            course.setModified(date);
+            courseRepository.save(course);
+            return course;
+        }
+        return null;
+    }
 }

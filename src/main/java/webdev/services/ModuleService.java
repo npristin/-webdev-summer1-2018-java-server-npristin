@@ -40,4 +40,9 @@ public class ModuleService {
         moduleRepository.deleteById(moduleId);
     }
 
+    @GetMapping("/api/module")
+    public List<Module> findAllModules() {
+        return (List<Module>) moduleRepository.findAll();
+    }
+
 }

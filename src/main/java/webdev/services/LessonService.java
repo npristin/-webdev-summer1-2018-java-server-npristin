@@ -40,4 +40,9 @@ public class LessonService {
         lessonRepository.deleteById(lessonId);
     }
 
+    @GetMapping("/api/lesson")
+    public List<Lesson> findAllLessons() {
+        return (List<Lesson>) lessonRepository.findAll();
+    }
+
 }

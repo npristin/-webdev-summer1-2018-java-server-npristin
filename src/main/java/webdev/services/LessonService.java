@@ -54,4 +54,14 @@ public class LessonService {
         return null;
     }
 
+    @GetMapping("/api/course/{cid}/module/{mid}/lesson")
+    public List<Lesson> findAllLessonsForModule(@PathVariable("mid") int moduleId) {
+        Optional<Module> potentialModule = moduleRepository.findById(moduleId);
+        if (potentialModule.isPresent()) {
+            Module module = potentialModule.get();
+            return module.getLessons();
+        }
+        return null;
+    }
+
 }

@@ -19,4 +19,20 @@ public class ModuleService {
     @Autowired
     CourseRepository courseRepository;
 
+    @PostMapping("/api/course/{cid}/module")
+    public Module createModule(@RequestBody Module module, @PathVariable("cid") int cid) {
+        Optional<Course> maybeCourse = courseRepository.findById(cid);
+        if (maybeCourse.isPresent()) {
+            Course course = maybeCourse.get();
+            List<Module> courseModules = course.getModules();
+            courseModules.add(module);
+            course.setModules(courseModules);
+            module.setCourse(course);
+
+            moduleRepository.save(module);
+            courseRepository.save(course);
+        }
+        return module;
+    }
+
 }

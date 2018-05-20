@@ -64,4 +64,17 @@ public class LessonService {
         return null;
     }
 
+    @PutMapping("/api/lesson/{id}")
+    public Lesson updateLesson(@RequestBody Lesson newLesson, @PathVariable("id") int lessonId) {
+        Optional<Lesson> potentialLesson = lessonRepository.findById(lessonId);
+        if (potentialLesson.isPresent()) {
+            Lesson lesson = potentialLesson.get();
+            lesson.setTitle(newLesson.getTitle());
+            lesson.setModule(newLesson.getModule());
+
+            lessonRepository.save(lesson);
+            return lesson;
+        }
+        return null;
+    }
 }

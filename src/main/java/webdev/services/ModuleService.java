@@ -64,4 +64,17 @@ public class ModuleService {
         return null;
     }
 
+    @PutMapping("/api/module/{id}")
+    public Module updateModule(@RequestBody Module newModule, @PathVariable("id") int moduleId) {
+        Optional<Module> potentialModule = moduleRepository.findById(moduleId);
+        if (potentialModule.isPresent()) {
+            Module module = potentialModule.get();
+            module.setTitle(newModule.getTitle());
+            module.setCourse(newModule.getCourse());
+
+            moduleRepository.save(module);
+            return module;
+        }
+        return null;
+    }
 }

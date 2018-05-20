@@ -35,4 +35,9 @@ public class LessonService {
         return lesson;
     }
 
+    @DeleteMapping("/api/lesson/{id}")
+    public void deleteLesson(@PathVariable("id") int lessonId) {
+        lessonRepository.deleteById(lessonId);
+    }
+
 }

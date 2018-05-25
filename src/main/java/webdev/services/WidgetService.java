@@ -19,10 +19,19 @@ public class WidgetService {
 
     @Autowired
     WidgetRepository widgetRepository;
-
+    
     @GetMapping("/api/widget")
     public List<Widget> findAllWidgets() {
         return (List<Widget>) widgetRepository.findAll();
+    }
+
+    @GetMapping("/api/widget/{widgetId}")
+    public Widget findWidgetById(@PathVariable("widgetId") int widgetId) {
+        Optional<Widget> maybeWidget = widgetRepository.findById(widgetId);
+        if (maybeWidget.isPresent()) {
+            return maybeWidget.get();
+        }
+        return null;
     }
 
 }

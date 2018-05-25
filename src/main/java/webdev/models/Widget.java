@@ -1,9 +1,8 @@
 package webdev.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity(name="widget")
 public class Widget {
@@ -23,9 +22,12 @@ public class Widget {
     private String src;
     private String listItems;
     private ListType listType;
+    @ManyToOne
+    @JsonIgnore
+    private Lesson lesson;
 
     public Widget(int id, String name, int order, String text, String className, String style, String width,
-                  String height, int size, String href, String src, String listItems, ListType listType) {
+                  String height, int size, String href, String src, String listItems, ListType listType, Lesson lseson) {
         this.id = id;
         this.name = name;
         this.order = order;
@@ -39,6 +41,7 @@ public class Widget {
         this.src = src;
         this.listItems = listItems;
         this.listType = listType;
+        this.lesson = lseson;
     }
 
     private Widget() {
@@ -147,5 +150,13 @@ public class Widget {
 
     public void setListType(ListType listType) {
         this.listType = listType;
+    }
+
+    public Lesson getLesson() {
+        return lesson;
+    }
+
+    public void setLesson(Lesson lesson) {
+        this.lesson = lesson;
     }
 }

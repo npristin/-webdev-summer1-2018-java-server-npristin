@@ -1,10 +1,7 @@
 package webdev.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import webdev.models.Lesson;
 import webdev.models.Widget;
 import webdev.repositories.LessonRepository;
@@ -45,4 +42,21 @@ public class WidgetService {
         }
         return null;
     }
+
+    @PostMapping("/api/lesson/{lessonId}/widget")
+    public Widget createWidget(@RequestBody Widget widget, @PathVariable("lessonId") int lessonId) {
+        Optional<Lesson> maybeLesson = lessonRepository.findById(lessonId);
+        if (maybeLesson.isPresent()) {
+            Lesson lesson = maybeLesson.get();
+            List<Widget> lessonWidgets = lesson.getWidgets();
+            lessonWidgets.add(widget);
+            lesson.setWidgets(lessonWidgets);
+            widget.setLesson(lesson);
+
+            widgetRepository.save(widget);
+            lessonRepository.save(lesson);
+        }
+        return widget;
+    }
+
 }

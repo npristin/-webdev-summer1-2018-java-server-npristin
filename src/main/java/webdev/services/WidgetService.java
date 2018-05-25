@@ -19,7 +19,9 @@ public class WidgetService {
 
     @Autowired
     WidgetRepository widgetRepository;
-    
+    @Autowired
+    LessonRepository lessonRepository;
+
     @GetMapping("/api/widget")
     public List<Widget> findAllWidgets() {
         return (List<Widget>) widgetRepository.findAll();
@@ -34,4 +36,13 @@ public class WidgetService {
         return null;
     }
 
+    @GetMapping("/api/lesson/{lessonId}/widget")
+    public List<Widget> findAllWidgetsForLesson(@PathVariable("lessonId") int lessonId) {
+        Optional<Lesson> maybeLesson = lessonRepository.findById(lessonId);
+        if (maybeLesson.isPresent()) {
+            Lesson lesson = maybeLesson.get();
+            return lesson.getWidgets();
+        }
+        return null;
+    }
 }

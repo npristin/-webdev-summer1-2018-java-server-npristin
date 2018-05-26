@@ -59,4 +59,27 @@ public class WidgetService {
         return widget;
     }
 
+    @PutMapping("/api/widget/{widgetId}")
+    public Widget updateWidget(@RequestBody Widget newWidget, @PathVariable("widgetId") int widgetId) {
+        Optional<Widget> maybeWidget = widgetRepository.findById(widgetId);
+        if (maybeWidget.isPresent()) {
+            Widget widget = maybeWidget.get();
+            widget.setName(newWidget.getName());
+            widget.setOrder(newWidget.getOrder());
+            widget.setText(newWidget.getText());
+            widget.setClassName(newWidget.getClassName());
+            widget.setStyle(newWidget.getStyle());
+            widget.setHeight(newWidget.getHeight());
+            widget.setWidth(newWidget.getWidth());
+            widget.setSize(newWidget.getSize());
+            widget.setHref(newWidget.getHref());
+            widget.setSrc(newWidget.getSrc());
+            widget.setListItems(newWidget.getListItems());
+            widget.setListType(newWidget.getListType());
+
+            widgetRepository.save(widget);
+            return widget;
+        }
+        return null;
+    }
 }

@@ -82,4 +82,9 @@ public class WidgetService {
         }
         return null;
     }
+
+    @DeleteMapping("/api/widget/{widgetId}")
+    public void deleteWidget(@PathVariable("widgetId") int widgetId) {
+        widgetRepository.deleteById(widgetId);
+    }
 }

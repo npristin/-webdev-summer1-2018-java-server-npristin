@@ -11,7 +11,7 @@ public class Widget {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String name;
-    private int order;
+    private int widgetOrder;
     private String text;
     private String className;
     private String style;
@@ -26,11 +26,11 @@ public class Widget {
     @JsonIgnore
     private Lesson lesson;
 
-    public Widget(int id, String name, int order, String text, String className, String style, String width,
+    public Widget(int id, String name, int widgetOrder, String text, String className, String style, String width,
                   String height, int size, String href, String src, String listItems, ListType listType, Lesson lseson) {
         this.id = id;
         this.name = name;
-        this.order = order;
+        this.widgetOrder = widgetOrder;
         this.text = text;
         this.className = className;
         this.style = style;
@@ -64,12 +64,12 @@ public class Widget {
         this.name = name;
     }
 
-    public int getOrder() {
-        return order;
+    public int getWidgetOrder() {
+        return widgetOrder;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setWidgetOrder(int widgetOrder) {
+        this.widgetOrder = widgetOrder;
     }
 
     public String getText() {

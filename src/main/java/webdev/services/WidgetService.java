@@ -65,7 +65,7 @@ public class WidgetService {
         if (maybeWidget.isPresent()) {
             Widget widget = maybeWidget.get();
             widget.setName(newWidget.getName());
-            widget.setOrder(newWidget.getOrder());
+            widget.setWidgetOrder(newWidget.getWidgetOrder());
             widget.setText(newWidget.getText());
             widget.setClassName(newWidget.getClassName());
             widget.setStyle(newWidget.getStyle());

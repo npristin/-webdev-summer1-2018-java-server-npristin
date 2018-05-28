@@ -52,11 +52,31 @@ public class WidgetService {
             lessonWidgets.add(widget);
             lesson.setWidgets(lessonWidgets);
             widget.setLesson(lesson);
+            widget.setLessonId(lessonId);
 
             widgetRepository.save(widget);
             lessonRepository.save(lesson);
         }
         return widget;
+    }
+
+    @PostMapping("/api/lesson/{lessonId}/widget/save")
+    public List<Widget> saveWidgets(@RequestBody List<Widget> widgets, @PathVariable("lessonId") int lessonId) {
+        Optional<Lesson> maybeLesson = lessonRepository.findById(lessonId);
+        if (maybeLesson.isPresent()) {
+            Lesson lesson = maybeLesson.get();
+            lesson.setWidgets(widgets);
+
+            for (Widget w : widgets) {
+                if (w.getLessonId() == 0) {
+                    w.setLesson(lesson);
+                    w.setLessonId(lessonId);
+                }
+                widgetRepository.save(w);
+            }
+            lessonRepository.save(lesson);
+        }
+        return widgets;
     }
 
     @PutMapping("/api/widget/{widgetId}")

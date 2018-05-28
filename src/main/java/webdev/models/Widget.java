@@ -25,9 +25,11 @@ public class Widget {
     @ManyToOne
     @JsonIgnore
     private Lesson lesson;
+    private int lessonIdDup;
 
     public Widget(int id, String name, int widgetOrder, String text, String className, String style, String width,
-                  String height, int size, String href, String src, String listItems, ListType listType, Lesson lseson) {
+                  String height, int size, String href, String src, String listItems, ListType listType, Lesson lesson,
+                  int lessonIdDup) {
         this.id = id;
         this.name = name;
         this.widgetOrder = widgetOrder;
@@ -41,7 +43,8 @@ public class Widget {
         this.src = src;
         this.listItems = listItems;
         this.listType = listType;
-        this.lesson = lseson;
+        this.lesson = lesson;
+        this.lessonIdDup = lessonIdDup;
     }
 
     private Widget() {
@@ -159,4 +162,8 @@ public class Widget {
     public void setLesson(Lesson lesson) {
         this.lesson = lesson;
     }
+
+    public int getLessonId() { return lessonIdDup; }
+
+    public void setLessonId(int lessonId) { this.lessonIdDup = lessonId; }
 }

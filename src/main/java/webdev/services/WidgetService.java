@@ -144,4 +144,26 @@ public class WidgetService {
         return (List<Widget>) widgetRepository.findAllOrderByWidgetOrder();
     }
 
+    @PostMapping("/api/lesson/{lessonId}/widget/{widgetId}/order/increment")
+    public List<Widget> incrementOrder(@RequestBody List<Widget> widgets,@PathVariable("widgetId") int widgetId,
+                               @PathVariable("lessonId") int lessonId) {
+        List<Widget> lessonWidgets = widgets.stream().filter(w -> w.getLessonId() == lessonId)
+                .collect(Collectors.toList());
+
+        for (int i = 0; i < lessonWidgets.size(); i++) {
+            Widget w = lessonWidgets.get(i);
+            if (w.getId() == widgetId && i < lessonWidgets.size() - 1) {
+                // replace the order of the two widgets
+                int originalOrder = w.getWidgetOrder();
+                Widget followingWidget = lessonWidgets.get(i + 1);
+                w.setWidgetOrder(followingWidget.getWidgetOrder());
+                followingWidget.setWidgetOrder(originalOrder);
+
+                widgetRepository.save(w);
+                widgetRepository.save(followingWidget);
+                break;
+            }
+        }
+        return (List<Widget>) widgetRepository.findAllOrderByWidgetOrder();
+    }
 }

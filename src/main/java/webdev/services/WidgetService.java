@@ -22,7 +22,7 @@ public class WidgetService {
 
     @GetMapping("/api/widget")
     public List<Widget> findAllWidgets() {
-        return (List<Widget>) widgetRepository.findAllOrderByWidgetOrder();
+        return (List<Widget>) widgetRepository.findAllOrdered();
     }
 
     @GetMapping("/api/widget/{widgetId}")
@@ -63,33 +63,35 @@ public class WidgetService {
 
     @PostMapping("/api/lesson/{lessonId}/widget/save")
     public List<Widget> saveWidgets(@RequestBody List<Widget> widgets, @PathVariable("lessonId") int lessonId) {
+        List<Widget> lessonWidgets = widgets.stream().filter(w -> w.getLessonId() == lessonId)
+                .collect(Collectors.toList());
+
+        int maxOrderForLesson = 0;
+        for(Widget widget : lessonWidgets) {
+            if (maxOrderForLesson < widget.getWidgetOrder()) {
+                maxOrderForLesson = widget.getWidgetOrder();
+            }
+        }
+
         Optional<Lesson> maybeLesson = lessonRepository.findById(lessonId);
         if (maybeLesson.isPresent()) {
             Lesson lesson = maybeLesson.get();
             lesson.setWidgets(widgets);
 
-            // get the number of widgets that have an assigned size
-            int orderedWidgets = 0;
-            for (Widget w : widgets) {
-                if (w.getWidgetOrder() > 0) {
-                    orderedWidgets += 1;
-                }
-            }
-
-            for (Widget w : widgets) {
+            for (Widget w : lessonWidgets) {
                 if (w.getLessonId() == 0) {
                     w.setLesson(lesson);
                     w.setLessonId(lessonId);
                 }
                 if (w.getWidgetOrder() == 0) {
-                    w.setWidgetOrder(orderedWidgets + 1);
-                    orderedWidgets += 1;
+                    w.setWidgetOrder(maxOrderForLesson + 1);
+                    maxOrderForLesson += 1;
                 }
                 widgetRepository.save(w);
             }
             lessonRepository.save(lesson);
         }
-        return widgets;
+        return (List<Widget>) widgetRepository.findAllOrdered();
     }
 
     @PutMapping("/api/widget/{widgetId}")
@@ -127,21 +129,24 @@ public class WidgetService {
         List<Widget> lessonWidgets = widgets.stream().filter(w -> w.getLessonId() == lessonId)
                 .collect(Collectors.toList());
 
-        for (int i = 0; i < lessonWidgets.size(); i++) {
+        for (int i = 1; i < lessonWidgets.size(); i++) {
             Widget w = lessonWidgets.get(i);
-            if (w.getId() == widgetId && i > 0) {
+            if (w.getId() == widgetId) {
                 // replace the order of the two widgets
                 int originalOrder = w.getWidgetOrder();
                 Widget priorWidget = lessonWidgets.get(i - 1);
                 w.setWidgetOrder(priorWidget.getWidgetOrder());
                 priorWidget.setWidgetOrder(originalOrder);
 
+                System.out.println(w.getWidgetOrder());
+                System.out.println(priorWidget.getWidgetOrder());
+
                 widgetRepository.save(w);
                 widgetRepository.save(priorWidget);
                 break;
             }
         }
-        return (List<Widget>) widgetRepository.findAllOrderByWidgetOrder();
+        return (List<Widget>) widgetRepository.findAllOrdered();
     }
 
     @PostMapping("/api/lesson/{lessonId}/widget/{widgetId}/order/increment")
@@ -150,20 +155,23 @@ public class WidgetService {
         List<Widget> lessonWidgets = widgets.stream().filter(w -> w.getLessonId() == lessonId)
                 .collect(Collectors.toList());
 
-        for (int i = 0; i < lessonWidgets.size(); i++) {
+        for (int i = 0; i < lessonWidgets.size() - 1; i++) {
             Widget w = lessonWidgets.get(i);
-            if (w.getId() == widgetId && i < lessonWidgets.size() - 1) {
+            if (w.getId() == widgetId) {
                 // replace the order of the two widgets
                 int originalOrder = w.getWidgetOrder();
                 Widget followingWidget = lessonWidgets.get(i + 1);
                 w.setWidgetOrder(followingWidget.getWidgetOrder());
                 followingWidget.setWidgetOrder(originalOrder);
 
+                System.out.println(w.getWidgetOrder());
+                System.out.println(followingWidget.getWidgetOrder());
+
                 widgetRepository.save(w);
                 widgetRepository.save(followingWidget);
                 break;
             }
         }
-        return (List<Widget>) widgetRepository.findAllOrderByWidgetOrder();
+        return (List<Widget>) widgetRepository.findAllOrdered();
     }
 }

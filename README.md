@@ -13,4 +13,4 @@ Login Page: [Login](https://cs4550-java-server-npristin.herokuapp.com/jquery/com
 Profile Page - Please access this page through registration or login.
 
 ## Links To Related Github Repositories
-React Client (Assignment 2): [React Client](https://github.com/npristin/cs4550-java-react-npristin)
+React/Redux Client (Assignment 2+3): [React Client](https://github.com/npristin/cs4550-java-react-npristin)

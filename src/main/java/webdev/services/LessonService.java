@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import webdev.models.Lesson;
 import webdev.models.Module;
+import webdev.models.Widget;
 import webdev.repositories.LessonRepository;
 import webdev.repositories.ModuleRepository;
+import webdev.repositories.WidgetRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +20,8 @@ public class LessonService {
     LessonRepository lessonRepository;
     @Autowired
     ModuleRepository moduleRepository;
+    @Autowired
+    WidgetRepository widgetRepository;
 
     @PostMapping("/api/course/{cid}/module/{mid}/lesson")
     public Lesson createLesson(@RequestBody Lesson lesson, @PathVariable("mid") int mid) {
@@ -37,6 +41,13 @@ public class LessonService {
 
     @DeleteMapping("/api/lesson/{id}")
     public void deleteLesson(@PathVariable("id") int lessonId) {
+        Optional<Lesson> maybeLesson = lessonRepository.findById(lessonId);
+        if (maybeLesson.isPresent()) {
+            Lesson lesson = maybeLesson.get();
+            for(Widget w : lesson.getWidgets()) {
+                widgetRepository.delete(w);
+            }
+        }
         lessonRepository.deleteById(lessonId);
     }
 

@@ -50,4 +50,21 @@ public class ExamService {
         return null;
     }
 
+    @PostMapping("/api/lesson/{lid}/exam")
+    public Exam createExam(@PathVariable("lid") int lid, @RequestBody Exam exam) {
+        Optional<Lesson> maybeLesson = lessonRepository.findById(lid);
+        if (maybeLesson.isPresent()) {
+            Lesson lesson = maybeLesson.get();
+            List<Exam> exams = lesson.getExams();
+            exams.add(exam);
+            exam.setLesson(lesson);
+            exam.setLessonId(lid);
+            lesson.setExams(exams);
+            examRepository.save(exam);
+            lessonRepository.save(lesson);
+            return exam;
+        }
+        return null;
+    }
+
 }

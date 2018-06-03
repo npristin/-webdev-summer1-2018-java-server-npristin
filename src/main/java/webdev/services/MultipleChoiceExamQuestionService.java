@@ -36,5 +36,10 @@ public class MultipleChoiceExamQuestionService {
         return null;
     }
 
+    @GetMapping("/api/choice")
+    public List<MultipleChoiceExamQuestion> findAllMultipleChoiceQuestions() {
+        return (List<MultipleChoiceExamQuestion>) multiChoiceQuestionRepository.findAll();
+    }
+
 
 }

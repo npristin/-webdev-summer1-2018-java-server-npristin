@@ -39,4 +39,15 @@ public class ExamService {
         return null;
     }
 
+    @GetMapping("/api/lesson/{lid}/exam")
+    public List<Exam> findExamsByLesson(@PathVariable("lid") int lid) {
+        Optional<Lesson> maybeLesson = lessonRepository.findById(lid);
+        if (maybeLesson.isPresent()) {
+            Lesson lesson = maybeLesson.get();
+            List<Exam> exams = lesson.getExams();
+            return exams;
+        }
+        return null;
+    }
+
 }

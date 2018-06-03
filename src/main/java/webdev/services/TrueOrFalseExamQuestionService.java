@@ -20,5 +20,20 @@ public class TrueOrFalseExamQuestionService {
     @Autowired
     ExamRepository examRepository;
 
-    
+    @PostMapping("/api/exam/{eid}/truefalse")
+    public TrueOrFalseExamQuestion createTrueFalse(@PathVariable("eid") int eid,
+                                                   @RequestBody TrueOrFalseExamQuestion trueFalseQuestion) {
+        Optional<Exam> maybeExam = examRepository.findById(eid);
+        if (maybeExam.isPresent()) {
+            Exam exam = maybeExam.get();
+            List<BaseExamQuestion> questions = exam.getQuestions();
+            trueFalseQuestion.setExam(exam);
+            questions.add(trueFalseQuestion);
+            examRepository.save(exam);
+            trueFalseQuestionRepository.save(trueFalseQuestion);
+            return trueFalseQuestion;
+        }
+        return null;
+    }
+
 }

@@ -50,4 +50,12 @@ public class MultipleChoiceExamQuestionService {
         return null;
     }
 
+    @DeleteMapping("/api/choice/{qid}")
+    public void deleteMultipleChoiceQuestionById(@PathVariable("qid") int questionId) {
+        Optional<MultipleChoiceExamQuestion> optional = multiChoiceQuestionRepository.findById(questionId);
+        if (optional.isPresent()) {
+            MultipleChoiceExamQuestion question = optional.get();
+            multiChoiceQuestionRepository.delete(question);
+        }
+    }
 }

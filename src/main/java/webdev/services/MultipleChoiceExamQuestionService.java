@@ -41,5 +41,13 @@ public class MultipleChoiceExamQuestionService {
         return (List<MultipleChoiceExamQuestion>) multiChoiceQuestionRepository.findAll();
     }
 
+    @GetMapping("/api/choice/{qid}")
+    public MultipleChoiceExamQuestion findMultipleChoiceQuestionById(@PathVariable("qid") int questionId) {
+        Optional<MultipleChoiceExamQuestion> optional = multiChoiceQuestionRepository.findById(questionId);
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+        return null;
+    }
 
 }

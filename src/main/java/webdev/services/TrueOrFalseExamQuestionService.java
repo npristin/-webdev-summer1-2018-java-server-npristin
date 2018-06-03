@@ -50,4 +50,12 @@ public class TrueOrFalseExamQuestionService {
         return null;
     }
 
+    @DeleteMapping("/api/truefalse/{qid}")
+    public void deleteTrueFalseQuestionById(@PathVariable("qid") int questionId) {
+        Optional<TrueOrFalseExamQuestion> optional = trueFalseQuestionRepository.findById(questionId);
+        if (optional.isPresent()) {
+            TrueOrFalseExamQuestion question = optional.get();
+            trueFalseQuestionRepository.delete(question);
+        }
+    }
 }

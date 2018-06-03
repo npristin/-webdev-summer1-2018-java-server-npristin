@@ -50,4 +50,12 @@ public class FillInTheBlanksExamQuestionService {
         return null;
     }
 
+    @DeleteMapping("/api/blanks/{qid}")
+    public void deleteFillInBlanksById(@PathVariable("qid") int questionId) {
+        Optional<FillInTheBlanksExamQuestion> optional = fillInTheBlanksRepository.findById(questionId);
+        if (optional.isPresent()) {
+            FillInTheBlanksExamQuestion question = optional.get();
+            fillInTheBlanksRepository.delete(question);
+        }
+    }
 }

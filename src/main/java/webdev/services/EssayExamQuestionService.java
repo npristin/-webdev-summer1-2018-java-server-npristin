@@ -36,4 +36,9 @@ public class EssayExamQuestionService {
         return null;
     }
 
+    @GetMapping("/api/essay")
+    public List<EssayExamQuestion> findAllEssayQuestions() {
+        return (List<EssayExamQuestion>) essayRepository.findAll();
+    }
+
 }

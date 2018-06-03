@@ -50,4 +50,12 @@ public class EssayExamQuestionService {
         return null;
     }
 
+    @DeleteMapping("/api/essay/{qid}")
+    public void deleteEssayById(@PathVariable("qid") int questionId) {
+        Optional<EssayExamQuestion> optional = essayRepository.findById(questionId);
+        if (optional.isPresent()) {
+            EssayExamQuestion question = optional.get();
+            essayRepository.delete(question);
+        }
+    }
 }

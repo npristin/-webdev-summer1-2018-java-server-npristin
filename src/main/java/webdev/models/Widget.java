@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity(name="widget")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Widget {
 
     @Id
@@ -47,8 +48,7 @@ public class Widget {
         this.lessonIdDup = lessonIdDup;
     }
 
-    private Widget() {
-
+    public Widget() {
     }
 
     public int getId() {

@@ -41,4 +41,13 @@ public class FillInTheBlanksExamQuestionService {
         return (List<FillInTheBlanksExamQuestion>) fillInTheBlanksRepository.findAll();
     }
 
+    @GetMapping("/api/blanks/{qid}")
+    public FillInTheBlanksExamQuestion findFillInBlankQuestionById(@PathVariable("qid") int questionId) {
+        Optional<FillInTheBlanksExamQuestion> optional = fillInTheBlanksRepository.findById(questionId);
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+        return null;
+    }
+
 }

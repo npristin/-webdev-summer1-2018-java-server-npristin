@@ -30,4 +30,5 @@ public class ExamService {
         return (List<Exam>) examRepository.findAll();
     }
 
+    
 }

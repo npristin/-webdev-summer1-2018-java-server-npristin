@@ -20,5 +20,25 @@ public class FillInTheBlanksExamQuestionService {
     @Autowired
     ExamRepository examRepository;
 
-    
+    @PostMapping("/api/exam/{eid}/blanks")
+    public FillInTheBlanksExamQuestion createFillInBlanksQuestion(@PathVariable("eid") int eid,
+                                                       @RequestBody FillInTheBlanksExamQuestion fillInBlanksQuestion) {
+        Optional<Exam> maybeExam = examRepository.findById(eid);
+        if (maybeExam.isPresent()) {
+            Exam exam = maybeExam.get();
+            List<BaseExamQuestion> questions = exam.getQuestions();
+            fillInBlanksQuestion.setExam(exam);
+            questions.add(fillInBlanksQuestion);
+            examRepository.save(exam);
+            fillInTheBlanksRepository.save(fillInBlanksQuestion);
+            return fillInBlanksQuestion;
+        }
+        return null;
+    }
+
+    @GetMapping("/api/blanks")
+    public List<FillInTheBlanksExamQuestion> findAllFillInBlanksQuestions() {
+        return (List<FillInTheBlanksExamQuestion>) fillInTheBlanksRepository.findAll();
+    }
+
 }

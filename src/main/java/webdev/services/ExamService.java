@@ -30,5 +30,13 @@ public class ExamService {
         return (List<Exam>) examRepository.findAll();
     }
 
-    
+    @GetMapping("/api/exam/{eid}")
+    public Exam findExamById(@PathVariable("eid") int eid) {
+        Optional<Exam> maybeExam = examRepository.findById(eid);
+        if (maybeExam.isPresent()) {
+            return maybeExam.get();
+        }
+        return null;
+    }
+
 }

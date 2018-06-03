@@ -11,10 +11,7 @@ import webdev.models.Lesson;
 import webdev.models.MultipleChoiceExamQuestion;
 import webdev.models.BaseExamQuestion;
 import webdev.models.TrueOrFalseExamQuestion;
-import webdev.repositories.ExamRepository;
-import webdev.repositories.LessonRepository;
-import webdev.repositories.MultipleChoiceExamQuestionRepository;
-import webdev.repositories.TrueOrFalseExamQuestionRepository;
+import webdev.repositories.*;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -24,6 +21,8 @@ public class ExamService {
     ExamRepository examRepository;
     @Autowired
     LessonRepository lessonRepository;
+    @Autowired
+    BaseExamQuestionRepository baseExamQuestionRepository;
 
     @GetMapping("/api/exam")
     public List<Exam> findAllExams() {
@@ -69,6 +68,13 @@ public class ExamService {
 
     @DeleteMapping("/api/exam/{eid}")
     public void deleteExam(@PathVariable("eid") int eid) {
+        Optional<Exam> maybeExam = examRepository.findById(eid);
+        if (maybeExam.isPresent()) {
+            Exam exam = maybeExam.get();
+            for (BaseExamQuestion question : exam.getQuestions()) {
+                baseExamQuestionRepository.delete(question);
+            }
+        }
         examRepository.deleteById(eid);
     }
 

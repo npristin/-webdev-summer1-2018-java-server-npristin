@@ -27,8 +27,9 @@ public class EssayExamQuestionService {
         if (maybeExam.isPresent()) {
             Exam exam = maybeExam.get();
             List<BaseExamQuestion> questions = exam.getQuestions();
-            essayQuestion.setExam(exam);
             questions.add(essayQuestion);
+            exam.setQuestions(questions);
+            essayQuestion.setExam(exam);
             examRepository.save(exam);
             essayRepository.save(essayQuestion);
             return essayQuestion;

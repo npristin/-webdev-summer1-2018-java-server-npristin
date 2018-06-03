@@ -1,5 +1,7 @@
 package webdev.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +17,7 @@ public class Course {
     @Temporal(TemporalType.TIMESTAMP)
     private Date modified;
     @OneToMany(mappedBy="course")
+    @JsonIgnore
     private List<Module> modules;
 
     public Course(int id, String title, Date created, Date modified, List<Module> modules) {

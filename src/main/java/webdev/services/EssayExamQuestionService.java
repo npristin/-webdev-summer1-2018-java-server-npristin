@@ -20,5 +20,20 @@ public class EssayExamQuestionService {
     @Autowired
     ExamRepository examRepository;
 
-    
+    @PostMapping("/api/exam/{eid}/essay")
+    public EssayExamQuestion createEssayQuestion(@PathVariable("eid") int eid,
+                                                  @RequestBody EssayExamQuestion essayQuestion) {
+        Optional<Exam> maybeExam = examRepository.findById(eid);
+        if (maybeExam.isPresent()) {
+            Exam exam = maybeExam.get();
+            List<BaseExamQuestion> questions = exam.getQuestions();
+            essayQuestion.setExam(exam);
+            questions.add(essayQuestion);
+            examRepository.save(exam);
+            essayRepository.save(essayQuestion);
+            return essayQuestion;
+        }
+        return null;
+    }
+
 }

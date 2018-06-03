@@ -36,4 +36,9 @@ public class TrueOrFalseExamQuestionService {
         return null;
     }
 
+    @GetMapping("/api/truefalse")
+    public List<TrueOrFalseExamQuestion> findAllTrueFalseQuestions() {
+        return (List<TrueOrFalseExamQuestion>) trueFalseQuestionRepository.findAll();
+    }
+
 }

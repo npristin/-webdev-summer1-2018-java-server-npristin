@@ -41,4 +41,13 @@ public class EssayExamQuestionService {
         return (List<EssayExamQuestion>) essayRepository.findAll();
     }
 
+    @GetMapping("/api/essay/{qid}")
+    public EssayExamQuestion findEssayQuestionById(@PathVariable("qid") int questionId) {
+        Optional<EssayExamQuestion> optional = essayRepository.findById(questionId);
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+        return null;
+    }
+
 }

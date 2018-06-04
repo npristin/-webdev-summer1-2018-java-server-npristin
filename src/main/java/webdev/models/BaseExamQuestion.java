@@ -15,6 +15,7 @@ public class BaseExamQuestion {
     private String title;
     private String description;
     private String instructions;
+    private String type;
     @ManyToOne
     @JsonIgnore
     private Exam exam;
@@ -56,5 +57,13 @@ public class BaseExamQuestion {
 
     public void setExam(Exam exam) {
         this.exam = exam;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

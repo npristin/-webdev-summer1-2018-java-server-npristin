@@ -30,6 +30,7 @@ public class EssayExamQuestionService {
             questions.add(essayQuestion);
             exam.setQuestions(questions);
             essayQuestion.setExam(exam);
+            essayQuestion.setType("essay");
             examRepository.save(exam);
             essayRepository.save(essayQuestion);
             return essayQuestion;

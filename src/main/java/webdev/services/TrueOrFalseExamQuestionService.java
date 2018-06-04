@@ -29,6 +29,9 @@ public class TrueOrFalseExamQuestionService {
             List<BaseExamQuestion> questions = exam.getQuestions();
             trueFalseQuestion.setExam(exam);
             questions.add(trueFalseQuestion);
+            exam.setQuestions(questions);
+            trueFalseQuestion.setExam(exam);
+            trueFalseQuestion.setType("truefalse");
             examRepository.save(exam);
             trueFalseQuestionRepository.save(trueFalseQuestion);
             return trueFalseQuestion;

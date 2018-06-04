@@ -29,6 +29,9 @@ public class MultipleChoiceExamQuestionService {
             List<BaseExamQuestion> questions = exam.getQuestions();
             choiceQuestion.setExam(exam);
             questions.add(choiceQuestion);
+            exam.setQuestions(questions);
+            choiceQuestion.setExam(exam);
+            choiceQuestion.setType("choice");
             examRepository.save(exam);
             multiChoiceQuestionRepository.save(choiceQuestion);
             return choiceQuestion;

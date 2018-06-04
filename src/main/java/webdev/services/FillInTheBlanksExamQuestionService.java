@@ -29,6 +29,9 @@ public class FillInTheBlanksExamQuestionService {
             List<BaseExamQuestion> questions = exam.getQuestions();
             fillInBlanksQuestion.setExam(exam);
             questions.add(fillInBlanksQuestion);
+            exam.setQuestions(questions);
+            fillInBlanksQuestion.setExam(exam);
+            fillInBlanksQuestion.setType("blanks");
             examRepository.save(exam);
             fillInTheBlanksRepository.save(fillInBlanksQuestion);
             return fillInBlanksQuestion;

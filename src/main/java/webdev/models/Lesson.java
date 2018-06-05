@@ -20,13 +20,17 @@ public class Lesson {
     @OneToMany(mappedBy = "lesson")
     @JsonIgnore
     private List<Exam> exams;
+    @OneToMany(mappedBy = "lesson")
+    @JsonIgnore
+    private List<Assignment> assignments;
 
-    public Lesson(int id, String title, Module module, List<Widget> widgets, List<Exam> exams) {
+    public Lesson(int id, String title, Module module, List<Widget> widgets, List<Exam> exams, List<Assignment> assignments) {
         this.id = id;
         this.title = title;
         this.module = module;
         this.widgets = widgets;
         this.exams = exams;
+        this.assignments = assignments;
     }
 
     public Lesson() {
@@ -71,5 +75,13 @@ public class Lesson {
 
     public void setExams(List<Exam> exams) {
         this.exams = exams;
+    }
+
+    public List<Assignment> getAssignments() {
+        return assignments;
+    }
+
+    public void setAssignments(List<Assignment> assignments) {
+        this.assignments = assignments;
     }
 }

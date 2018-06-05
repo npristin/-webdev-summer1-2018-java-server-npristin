@@ -77,15 +77,4 @@ public class ExamService {
         }
         examRepository.deleteById(eid);
     }
-
-    @GetMapping("/api/exam/{examId}/question")
-    public List<BaseExamQuestion> findAllQuestionsForExam(@PathVariable("examId") int examId) {
-        Optional<Exam> optionalExam = examRepository.findById(examId);
-        if(optionalExam.isPresent()) {
-            Exam exam = optionalExam.get();
-            List<BaseExamQuestion> questions = exam.getQuestions();
-            return questions;
-        }
-        return null;
-    }
 }

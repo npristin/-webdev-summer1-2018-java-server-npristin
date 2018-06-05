@@ -27,4 +27,11 @@ public class BaseExamQuestionService {
         }
         return null;
     }
+
+    @GetMapping("/api/question")
+    public List<BaseExamQuestion> findAllQuestions() {
+        return (List<BaseExamQuestion>) baseExamQuestionRepository.findAll();
+    }
+
+   
 }

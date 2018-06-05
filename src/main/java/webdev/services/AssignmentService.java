@@ -61,4 +61,8 @@ public class AssignmentService {
         return null;
     }
 
+    @DeleteMapping("/api/assignment/{aid}")
+    public void deleteAssignment(@PathVariable("aid") int aid) {
+        assignmentRepository.deleteById(aid);
+    }
 }

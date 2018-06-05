@@ -33,5 +33,12 @@ public class BaseExamQuestionService {
         return (List<BaseExamQuestion>) baseExamQuestionRepository.findAll();
     }
 
-   
+    @GetMapping("/api/question/{qid}")
+    public BaseExamQuestion findQuestionById(@PathVariable("qid") int qid) {
+        Optional<BaseExamQuestion> maybeQuestion = baseExamQuestionRepository.findById(qid);
+        if (maybeQuestion.isPresent()) {
+            return maybeQuestion.get();
+        }
+        return null;
+    }
 }

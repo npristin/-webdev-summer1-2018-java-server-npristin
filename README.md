@@ -1,4 +1,4 @@
-# CS 4500 - Web Development
+# CS 4550 - Web Development
 Assignment 1 Repository - Java Server
 
 By: Nicole Pristin

@@ -37,5 +37,16 @@ public class AssignmentService {
         return null;
     }
 
+    @GetMapping("/api/lesson/{lid}/assignment")
+    public List<Assignment> findAssignmentsByLesson(@PathVariable("lid") int lid) {
+        Optional<Lesson> maybeLesson = lessonRepository.findById(lid);
+        if (maybeLesson.isPresent()) {
+            Lesson lesson = maybeLesson.get();
+            List<Assignment> assignments = lesson.getAssignments();
+            return assignments;
+        }
+        return null;
+    }
+
 
 }
